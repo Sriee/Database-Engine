@@ -2,7 +2,7 @@
 
 A rudimentary database engine implementation that is loosely based on MySQL. I will call this database as **_Base_**.
 
-[!alt title](https://cloud.githubusercontent.com/assets/8402606/15101023/76859ed2-154a-11e6-8c7c-293f1f0a830b.GIF)
+![alt Title](https://cloud.githubusercontent.com/assets/8402606/15101023/76859ed2-154a-11e6-8c7c-293f1f0a830b.GIF)
 
 ## Requirements
 
@@ -30,26 +30,26 @@ Your database engine must support the following high-level commands. All command
 
 Display a list all database schemas by name, including the system information_schema.
 
-#### USE _schema_name_;
+##### USE _schema_name_;
 
 This determines the schema that is currently in use (i.e. active). All other table-specific commands should consider only tables in the database schema that is currently active. When Base is launched, the currently active schema should default to **information_schema**.
 
-#### SHOW TABLES;
+##### SHOW TABLES;
 
 Display a list all table names in the currently used schema.
 
-#### CREATE SCHEMA schema_name;
+##### CREATE SCHEMA schema_name;
 
 Create a new schema.
 
-#### CREATE TABLE
+##### CREATE TABLE
 
-	**CREATE TABLE** _table_name (
+	**CREATE TABLE** table_name (
 	column_name1 data_type(size) [primary key|not null],
 	column_name2 data_type(size) [primary key|not null],
 	column_name3 data_type(size) [primary key|not null],
 	...
-	);_
+	);
 
 Create the table schema information for a new table. It will be created in the current schema. In other words, add appropriate entries to the system **information_schema** tables that define the described **CREATE TABLE**.
 
@@ -70,18 +70,18 @@ Your table definition should support the following data types. All numbers shoul
 
 The only table constraints that are support are PRIMARY KEY and NOT NULL (to indicate that NULL values are not permitted for a particular column). All primary keys are single column keys. If a column is a primary key, its **information_schema.COLUMNS.COLUMN_KEY** attribute will be **“PRI”**, otherwise, it will be the empty string. If a column is defined as **NOT NULL**, then its **information_schema.COLUMNS.IS_NULLABLE** attribute will be **“NO”**, otherwise, it will be **“YES”**. Base does not support **FOREIGN KEY**.
 
-#### INSERT INTO TABLE
+##### INSERT INTO TABLE
 
-	_INSERT INTO TABLE table_name VALUES (value1,value2,value3,…);_
+	INSERT INTO TABLE table_name VALUES (value1,value2,value3,…);
 
 Insert a new record into the indicated table. If n values are supplied, they will be mapped onto the first n columns. Prohibit inserts that do not include
 the primary key column or do not include a NOT NULL column. For columns that allow NULL values, INSERT INTO TABLE should parse the keyword NULL in the values list as the special value NULL.
 
-#### SELECT-FROM-WHERE
+##### SELECT-FROM-WHERE
 
-	_SELECT *
+	SELECT *
 	FROM table_name
-	WHERE column_name operator value;_
+	WHERE column_name operator value;
 	
 Query syntax is similar to formal SQL. The result set should display to stdout (the terminal) formatted like a typical SQL query. The differences between Base query syntax and SQL query syntax is described below.
 
